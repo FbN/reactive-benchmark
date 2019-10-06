@@ -20,15 +20,18 @@ function getId (type) {
 function todo () {
     return {
         id: getId('todo'),
-        text: 'Lorem ipsum',
-        time: new Date()
+        text: 'Lorem ipsum'
     }
 }
 
 function todoList (deferred) {
-    const ping$ = R.from([...Array(iterations).keys()])
+    const ping$ = new R.Observable(listener => {
+        setTimeout(() => {
+            ;[...Array(iterations).keys()].forEach(i => listener.next(i))
+        }, 1)
+    })
 
-    const todo$ = RO.map(todo)(ping$)
+    const todo$ = RO.share()(RO.map(todo)(ping$))
 
     const old$ = RO.startWith({})(RO.filter(todo => todo.id % 4 === 0)(todo$))
 

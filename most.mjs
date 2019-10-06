@@ -19,7 +19,8 @@ const {
     filter,
     startWith,
     snapshot,
-    take
+    take,
+    delay
 } = M
 
 const { newDefaultScheduler } = MS
@@ -38,8 +39,7 @@ function getId (type) {
 function todo () {
     return {
         id: getId('todo'),
-        text: 'Lorem ipsum',
-        time: new Date()
+        text: 'Lorem ipsum'
     }
 }
 
@@ -50,7 +50,7 @@ function todoList (deferred) {
 
     const todo$ = multicast(map(todo, ping$))
 
-    const old$ = startWith({}, filter(todo => todo.id % 4 === 0, todo$))
+    const old$ = filter(todo => todo.id % 4 === 0, todo$)
 
     const sample$ = snapshot(
         (old, last) => ({
