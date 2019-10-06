@@ -1,13 +1,12 @@
 import R from 'rxjs'
 import RO from 'rxjs/operators'
+import config from './config.mjs'
 
 const batch$ = new R.Subject()
 
 const induce = function (ev) {
     batch$.next(ev)
 }
-
-const iterations = 1000
 
 const counters = {
     todo: 0
@@ -27,7 +26,7 @@ function todo () {
 function todoList (deferred) {
     const ping$ = new R.Observable(listener => {
         setTimeout(() => {
-            ;[...Array(iterations).keys()].forEach(i => listener.next(i))
+            ;[...Array(config.iterations).keys()].forEach(i => listener.next(i))
         }, 1)
     })
 
@@ -43,7 +42,7 @@ function todoList (deferred) {
     const list$ = RO.scan((list, item) => [...list, item], [])(sample$)
 
     const end$ = RO.take(1)(
-        RO.filter(list => list.length === iterations)(list$)
+        RO.filter(list => list.length === config.iterations)(list$)
     )
 
     return RO.tap(res => deferred.resolve(res))(end$)

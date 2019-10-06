@@ -2,7 +2,7 @@ import M from '@most/core'
 import MS from '@most/scheduler'
 import MA from '@most/adapter'
 import FA from 'most-from-array'
-
+import config from './config.mjs'
 const fromArray = FA.fromArray
 
 const { createAdapter } = MA
@@ -17,16 +17,11 @@ const {
     runEffects,
     join,
     filter,
-    startWith,
     snapshot,
-    take,
-    delay
+    take
 } = M
 
 const { newDefaultScheduler } = MS
-
-const iterations = 1000
-// const period = 1
 
 const counters = {
     todo: 0
@@ -46,7 +41,7 @@ function todo () {
 function todoList (deferred) {
     // const ping$ = take(iterations, periodic(period))
 
-    const ping$ = fromArray([...Array(iterations).keys()])
+    const ping$ = fromArray([...Array(config.iterations).keys()])
 
     const todo$ = multicast(map(todo, ping$))
 
@@ -63,7 +58,10 @@ function todoList (deferred) {
 
     const list$ = scan((list, item) => [...list, item], [], sample$)
 
-    const end$ = take(1, filter(list => list.length === iterations, list$))
+    const end$ = take(
+        1,
+        filter(list => list.length === config.iterations, list$)
+    )
 
     return tap(res => deferred.resolve(res), end$)
 }

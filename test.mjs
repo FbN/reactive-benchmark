@@ -22,22 +22,8 @@ const xs = new Promise(function (resolve, reject) {
     })
 })
 
-// most.then(mostRes => console.log('most', mostRes.length))
-//
-// xstream.then(xstreamRes => console.log('xstream', xstreamRes.length))
-//
-// most.then(mostRes => console.log('most', mostRes[mostRes.length - 1]))
-//
-// xstream.then(xstreamRes =>
-//     console.log('xstream', xstreamRes[xstreamRes.length - 1])
-// )
-
 Promise.all([most, xstream, xs]).then(([mostRes, xstreamRes, xsRes]) => {
     assert.deepStrictEqual(mostRes, xstreamRes)
     assert.deepStrictEqual(mostRes, xsRes)
     console.log('OK')
-    // console.log('most', mostRes[0])
-    // console.log('xs', xsRes[0])
-    // console.log('most', mostRes[mostRes.length - 1])
-    // console.log('xs', xsRes[xstreamRes.length - 1])
 })
