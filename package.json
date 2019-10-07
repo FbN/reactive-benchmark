@@ -5,7 +5,8 @@
     "@most/core": "^1.5.0",
     "@most/scheduler": "^1.2.3",
     "benchmark": "^2.1.4",
-    "csv-write-stream": "^2.0.0",
+    "chart-csv": "^1.0.3",
+    "csv-writer": "^1.5.0",
     "most-from-array": "^1.0.3",
     "rxjs": "^6.5.3",
     "xstream": "^11.11.0"

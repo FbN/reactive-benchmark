@@ -39,8 +39,6 @@ function todo () {
 }
 
 function todoList (deferred) {
-    // const ping$ = take(iterations, periodic(period))
-
     const ping$ = fromArray([...Array(config.iterations).keys()])
 
     const todo$ = multicast(map(todo, ping$))

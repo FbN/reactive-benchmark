@@ -32,7 +32,7 @@ function todoList (deferred) {
                 ;[...Array(config.iterations).keys()].forEach(i =>
                     listener.next(i)
                 )
-            }, 1)
+            }, 0)
         },
 
         stop: function () {

@@ -27,7 +27,7 @@ function todoList (deferred) {
     const ping$ = new R.Observable(listener => {
         setTimeout(() => {
             ;[...Array(config.iterations).keys()].forEach(i => listener.next(i))
-        }, 1)
+        }, 0)
     })
 
     const todo$ = RO.share()(RO.map(todo)(ping$))

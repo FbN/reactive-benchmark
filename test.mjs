@@ -2,7 +2,6 @@ import { induce as mostInduce } from './most.mjs'
 import { induce as xstreamInduce } from './xstream.mjs'
 import { induce as rxInduce } from './rxjs.mjs'
 import assert from 'assert'
-// import { induce as rxInduce } from './rxjs.mjs'
 
 const most = new Promise(function (resolve, reject) {
     mostInduce({
