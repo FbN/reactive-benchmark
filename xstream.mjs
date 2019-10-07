@@ -35,9 +35,7 @@ function todoList (deferred) {
             }, 0)
         },
 
-        stop: function () {
-            clearInterval(this.id)
-        }
+        stop: function () {}
     })
 
     const todo$ = ping$.map(todo)
