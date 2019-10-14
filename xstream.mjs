@@ -1,9 +1,9 @@
 import XS from 'xstream'
-import FC from 'xstream/extra/flattenConcurrently'
+// import FC from 'xstream/extra/flattenConcurrently'
 import SC from 'xstream/extra/sampleCombine'
 import config from './config.mjs'
 
-const flattenConcurrently = FC.default
+// const flattenConcurrently = FC.default
 const sampleCombine = SC.default
 const xs = XS.Stream
 
@@ -53,12 +53,12 @@ function todoList (deferred) {
 
     return end$.map(res => deferred.resolve(res))
 }
-
-const lists$ = flattenConcurrently(batch$.map(todoList))
+const lists$ = batch$.map(todoList).flatten()
+// const lists$ = flattenConcurrently(batch$.map(todoList))
 
 lists$.addListener({
     next: () => {},
-    error: console.error,
+    error: e => {},
     complete: () => {}
 })
 

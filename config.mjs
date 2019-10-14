@@ -1,3 +1,3 @@
 export default {
-    iterations: 1000
+    iterations: 1500
 }

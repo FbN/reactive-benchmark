@@ -18,7 +18,9 @@ const {
     join,
     filter,
     snapshot,
-    take
+    take,
+    merge,
+    skip
 } = M
 
 const { newDefaultScheduler } = MS
@@ -43,7 +45,10 @@ function todoList (deferred) {
 
     const todo$ = multicast(map(todo, ping$))
 
-    const old$ = filter(todo => todo.id % 4 === 0, todo$)
+    const old$ = merge(
+        map(todo => (todo.id % 4 === 0 ? todo : {}), take(1, todo$)),
+        filter(todo => todo.id % 4 === 0, skip(1, todo$))
+    )
 
     const sample$ = snapshot(
         (old, last) => ({
