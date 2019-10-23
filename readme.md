@@ -21,6 +21,10 @@ yarn test
 ```bash
 yarn run speed
 ```
+Results files:
+
+- .tmp/data-promise.html
+- .tmp/data-recursive.html
 
 ## Memory Benchmark
 ```bash
