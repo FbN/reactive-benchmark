@@ -1,5 +1,7 @@
 # FRP Streams Library Benchmarks
 
+[Related blog post](https://medium.com/better-programming/compare-leading-javascript-functional-reactive-stream-libraries-544163c1ded6)
+
 Speed and Memory Benchmark of"
 - Imperative
 - RxJs
